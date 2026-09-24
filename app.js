@@ -16,13 +16,18 @@ function save() {
   localStorage.setItem(STORAGE_KEY, JSON.stringify(observations));
 }
 
+function formatAltitude(observation) {
+  const minutes = Number(observation.minutes) + (Number(observation.seconds) || 0) / 60;
+  return `${String(observation.degrees).padStart(2, '0')}° ${minutes.toFixed(1).padStart(4, '0')}′`;
+}
+
 function renderObservations() {
   savedSection.hidden = observations.length === 0;
   observationCount.textContent = observations.length;
   observationList.innerHTML = observations.map((observation) => `
     <li>
       <time datetime="${observation.time}">${new Intl.DateTimeFormat(undefined, { dateStyle: 'medium', timeStyle: 'short', timeZone: 'UTC' }).format(new Date(observation.time))} UTC</time>
-      <strong>${observation.degrees}° ${observation.minutes}′ ${observation.seconds}″</strong>
+      <strong>${formatAltitude(observation)}</strong>
       <span>${observation.horizon} horizon</span>
     </li>
   `).join('');
@@ -35,7 +40,6 @@ form.addEventListener('submit', (event) => {
     time: formData.get('time'),
     degrees: formData.get('degrees'),
     minutes: formData.get('minutes'),
-    seconds: formData.get('seconds'),
     horizon: formData.get('horizon'),
   });
   save();
