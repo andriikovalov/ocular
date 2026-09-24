@@ -1,0 +1,23 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64">
+  <defs>
+    <clipPath id="lens">
+      <circle cx="32" cy="32" r="27" />
+    </clipPath>
+    <clipPath id="left-half">
+      <rect x="5" y="5" width="27" height="54" />
+    </clipPath>
+    <clipPath id="right-half">
+      <rect x="32" y="5" width="27" height="54" />
+    </clipPath>
+  </defs>
+  <circle cx="32" cy="32" r="27" fill="#050708" />
+  <g clip-path="url(#lens)">
+    <g opacity=".6">
+      <rect x="5" y="5" width="27" height="36" fill="#94e5f5" />
+      <rect x="5" y="41" width="27" height="18" fill="#277d9b" />
+    </g>
+    <circle cx="32" cy="32" r="9" fill="#72c957" opacity=".16" clip-path="url(#left-half)" />
+    <circle cx="32" cy="32" r="9" fill="#72c957" clip-path="url(#right-half)" />
+  </g>
+  <circle cx="32" cy="32" r="27" fill="none" stroke="#d5edf0" stroke-width="3" />
+</svg>

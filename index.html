@@ -1,0 +1,80 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="theme-color" content="#102b42" />
+    <meta name="description" content="A field log for celestial navigation observations." />
+    <link rel="manifest" href="manifest.webmanifest" />
+    <link rel="icon" href="icon.svg" type="image/svg+xml" />
+    <link rel="stylesheet" href="styles.css" />
+    <title>Ocular | Sextant log</title>
+  </head>
+  <body>
+    <main class="app-shell">
+      <header class="app-header">
+        <div>
+          <p class="eyebrow">Celestial navigation log</p>
+          <h1>Ocular</h1>
+        </div>
+        <button class="icon-button" id="install-button" type="button" aria-label="Install Ocular" hidden>
+          <span aria-hidden="true">↓</span>
+        </button>
+      </header>
+
+      <section class="intro" aria-labelledby="observation-heading">
+        <div>
+          <p class="date">Observation 01</p>
+          <h2 id="observation-heading">Log a sight.</h2>
+        </div>
+        <p class="status">UTC</p>
+      </section>
+
+      <form class="observation-form" id="observation-form">
+        <fieldset>
+          <legend>Time of sight</legend>
+          <label for="observation-time">UTC date and time</label>
+          <input id="observation-time" name="time" type="datetime-local" required />
+        </fieldset>
+
+        <fieldset>
+          <legend>Observed altitude</legend>
+          <p class="field-hint">Sextant reading, Hs</p>
+          <div class="angle-fields">
+            <label>Degrees <input name="degrees" type="number" min="0" max="90" placeholder="00" required /></label>
+            <span class="angle-mark">°</span>
+            <label>Minutes <input name="minutes" type="number" min="0" max="59" placeholder="00" required /></label>
+            <span class="angle-mark">′</span>
+            <label>Seconds <input name="seconds" type="number" min="0" max="59.9" step="0.1" placeholder="0.0" required /></label>
+            <span class="angle-mark">″</span>
+          </div>
+        </fieldset>
+
+        <fieldset>
+          <legend>Horizon</legend>
+          <label for="horizon">Type of horizon</label>
+          <select id="horizon" name="horizon">
+            <option>Natural</option>
+            <option>Artificial</option>
+          </select>
+        </fieldset>
+
+        <button class="primary-button" type="submit">Save observation <span aria-hidden="true">→</span></button>
+      </form>
+
+      <section class="saved-observations" aria-labelledby="saved-heading" hidden>
+        <div class="section-heading">
+          <h3 id="saved-heading">Recent observations</h3>
+          <span id="observation-count"></span>
+        </div>
+        <ul id="observation-list"></ul>
+      </section>
+
+      <footer class="app-footer">
+        <span>Stored on this device</span>
+        <span>Ocular / 01</span>
+      </footer>
+    </main>
+    <script src="app.js" defer></script>
+  </body>
+</html>
