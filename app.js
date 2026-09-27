@@ -9,7 +9,7 @@ let observations = JSON.parse(localStorage.getItem(STORAGE_KEY) || '[]');
 function setCurrentTime() {
   const now = new Date();
   now.setMinutes(now.getMinutes() - now.getTimezoneOffset());
-  timeInput.value = now.toISOString().slice(0, 16);
+  timeInput.value = now.toISOString().slice(0, 19);
 }
 
 function save() {
