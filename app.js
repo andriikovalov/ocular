@@ -4,7 +4,10 @@ const savedSection = document.querySelector('.saved-observations');
 const observationList = document.querySelector('#observation-list');
 const observationCount = document.querySelector('#observation-count');
 const timeInput = document.querySelector('#observation-time');
+const setTimeButton = document.querySelector('#set-time-button');
+const timeOverlay = document.querySelector('#time-overlay');
 let observations = JSON.parse(localStorage.getItem(STORAGE_KEY) || '[]');
+let timeSetterActive = false;
 
 function setCurrentTime() {
   const now = new Date();
@@ -14,6 +17,20 @@ function setCurrentTime() {
 
 function save() {
   localStorage.setItem(STORAGE_KEY, JSON.stringify(observations));
+}
+
+function openTimeSetter() {
+  timeSetterActive = true;
+  timeOverlay.hidden = false;
+  timeOverlay.setAttribute('aria-hidden', 'false');
+}
+
+function setTimeFromUserInput() {
+  if (!timeSetterActive) return;
+  setCurrentTime();
+  timeSetterActive = false;
+  timeOverlay.hidden = true;
+  timeOverlay.setAttribute('aria-hidden', 'true');
 }
 
 function formatAltitude(observation) {
@@ -51,6 +68,9 @@ form.addEventListener('submit', (event) => {
 
 setCurrentTime();
 renderObservations();
+setTimeButton.addEventListener('click', openTimeSetter);
+document.addEventListener('pointerdown', setTimeFromUserInput);
+document.addEventListener('keydown', setTimeFromUserInput);
 
 let deferredInstall;
 window.addEventListener('beforeinstallprompt', (event) => {

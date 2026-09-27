@@ -34,7 +34,10 @@
         <fieldset>
           <legend>Time of sight</legend>
           <label for="observation-time">UTC date and time</label>
-          <input id="observation-time" name="time" type="datetime-local" step="1" required />
+          <div class="time-input-row">
+            <button class="secondary-button" id="set-time-button" type="button">Set</button>
+            <input id="observation-time" name="time" type="datetime-local" step="1" required />
+          </div>
         </fieldset>
 
         <fieldset>
@@ -73,6 +76,9 @@
         <span>Ocular / 01</span>
       </footer>
     </main>
+    <div class="time-overlay" id="time-overlay" role="status" aria-live="polite" aria-hidden="true" hidden>
+      <p>Press/click/tap to set time</p>
+    </div>
     <script src="app.js" defer></script>
   </body>
 </html>
